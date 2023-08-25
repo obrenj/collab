@@ -158,16 +158,15 @@ To get started, you'll need:
 
 * [Docker Engine](https://docs.docker.com/engine/install/#server)
 * [Docker Compose](https://docs.docker.com/compose/install/#install-compose-on-linux-systems)
-* [Curl](https://curl.se)
 
-> By default, curl comes bundled with most Linux distributions. You can check if it’s installed on your machine by running `curl --version`
+We recommend managing docker as a non-root user. Learn more about it on [linux post-installation steps for docker engine](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user)
 
 ### Setting up PSPDFKit Processor
 
 Start the processor by running:
 
 ```cmd
-sudo docker run --rm -t -p 5000:5000 pspdfkit/processor:2023.7.0
+docker run --rm -t -p 5000:5000 pspdfkit/processor:2023.7.0
 ```
 
 > When run for the first time, docker will pull the image from the repository. Depending on your internet connection speed, this might take a while.
@@ -286,7 +285,25 @@ You'll send the `instructions` JSON and the path to the input PDF (the PDF you w
 
 ### Running OCR on All Pages
 
-To perform `OCR` on all pages of a PDF document, make sure that the PSPDFKit processor is running and execute the following command:
+Make sure you have [`curl`](https://curl.se) installed on your machine.
+
+> You can check if `curl` is installed by running `curl --version`
+
+Install `curl` using the following command on Ubuntu or Debian-based systems:
+
+```
+$ sudo apt install curl
+```
+
+On Fedora, use:
+
+```
+$ sudo dnf install curl
+```
+
+Now, to perform `OCR` on all pages of a PDF document, make sure that the PSPDFKit processor is running and execute the following command:
+
+Now, to perform `OCR` on all pages of a PDF document, make sure that the PSPDFKit processor is running and execute the following command:
 
 ```cmd
 curl -X POST http://localhost:5000/build \
